@@ -5,14 +5,15 @@ var credentials = require('./credentials.js');
 //create redis client                                                                                                                                                                                                                       
 var client = redis.createClient();
 
-//if the 'awesome' key doesn't exist, create it                                                                                                                                                                                             
+//if the 'awesome' key doesn't exist, create it
+/*
 client.exists('awesome', function(error, exists) {
     if(error) {
         console.log('ERROR: '+error);
     } else if(!exists) {
         client.set('awesome', 0); //create the awesome key
     };
-});
+});*/
 
 var t = new twitter({
     consumer_key: credentials.consumer_key,
@@ -27,9 +28,21 @@ t.stream(
     function(stream) {
         stream.on('data', function(tweet) {
             console.log(tweet.text);
-            //if awesome is in the tweet text, increment the counter                                                                                                                                                                        
+            //if awesome is in the tweet text, increment the counter
             if(tweet.text.match(/awesome/)) {
                 client.incr('awesome');
+            }
+            if(tweet.text.match(/cool/)) {
+                client.incr('cool');
+            }
+            if(tweet.text.match(/rad/)) {
+                client.incr('rad');
+            }
+            if(tweet.text.match(/gnarly/)) {
+                client.incr('gnarly');
+            }
+            if(tweet.text.match(/groovy/)) {
+                client.incr('groovy');
             }
         });
     }
