@@ -2,7 +2,7 @@ var twitter = require('ntwitter');
 var redis = require('redis');
 var credentials = require('./credentials.js');
 
-//create redis client                                                                                                                                                                                                                       
+//create redis client 
 var client = redis.createClient();
 
 //if the 'awesome' key doesn't exist, create it
